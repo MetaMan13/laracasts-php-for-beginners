@@ -25,6 +25,11 @@ class Router
         $this->add('POST', $uri, $controller);
     }
 
+    public function delete($uri, $controller)
+    {
+        $this->add('DELETE', $uri, $controller);
+    }
+
     public function patch($uri, $controller)
     {
         $this->add('PATCH', $uri, $controller);
@@ -33,11 +38,6 @@ class Router
     public function put($uri, $controller)
     {
         $this->add('PUT', $uri, $controller);
-    }
-
-    public function delete($uri, $controller)
-    {
-        $this->add('DELETE', $uri, $controller);
     }
 
     public function route($uri, $method)
@@ -51,11 +51,11 @@ class Router
         $this->abort();
     }
 
-    public function abort($code = 404)
+    protected function abort($code = 404)
     {
         http_response_code($code);
 
-        require base_path("/views/{$code}.php");
+        require base_path("views/{$code}.php");
 
         die();
     }
